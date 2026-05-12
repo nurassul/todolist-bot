@@ -8,6 +8,9 @@ from app.keyboard.kb import main_menu
 router = Router()
 
 
+# Чисто для обработки базовых команд.
+# /start /help
+
 # ───────────────────────── /start ─────────────────────────
 
 # Для обработки команды /start
@@ -33,6 +36,8 @@ async def cmd_start(msg: Message):
         reply_markup=main_menu()
     )
 
+
+# Тут показываем всю инфу про наш бот и какие команды есть
 @router.message(F.text == "🔍 Help")
 @router.message(F.text == "/help")
 async def show_help(msg: Message):

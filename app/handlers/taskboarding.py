@@ -14,7 +14,7 @@ from app.keyboard.kb import main_menu, task_kb, edit_field_kb, task_priority_kb
 
 router = Router()
 
-
+# Для обработки команды главного меню
 # ───────────────────────── Main menu ─────────────────────────
 
 # ──────────────── Working with tasks ────────────────────
@@ -52,7 +52,6 @@ async def complete_task(callback: CallbackQuery):
     old_text = callback.message.html_text
     await callback.message.edit_text(
         text=f"<s>{old_text}</s>\n\n<i>✨ Done!</i>",
-        parse_mode="HTML",
         reply_markup=None
     )
     await callback.answer("Task closed!")
@@ -68,7 +67,6 @@ async def delete_task(callback: CallbackQuery):
     old_text = callback.message.html_text
     await callback.message.edit_text(
         text=f"<s>{old_text}</s>\n\n<i>❌ Deleted!</i>",
-        parse_mode="HTML",
         reply_markup=None
     )
     await callback.answer("Task closed!")

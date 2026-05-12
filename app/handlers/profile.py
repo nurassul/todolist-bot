@@ -7,7 +7,8 @@ from app.keyboard.kb import main_menu
 
 router = Router()
 
-
+# Чисто для обработки про профиль юзера
+# Выводим информацию про юзера и типо статистику задач.
 @router.message(F.text == "👤 My Profile")
 async def show_profile(message: Message):
     stats = await get_user_profile_stats(message.from_user.id)

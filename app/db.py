@@ -125,6 +125,7 @@ async def get_upcoming_deadlines(min_minutes: int, max_minutes: int):
         result = await session.execute(stmt)
         return result.scalars().all()
 
+
 async def get_user_profile_stats(user_id: int) -> dict | None:
     async with AsyncSessionLocal() as session:
         user_stmt = select(User).where(User.user_tg_id == user_id)
