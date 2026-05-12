@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      TZ: "Asia/Almaty"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  bot:
+    build: ./
+    depends_on:
+      postgres:
+        condition: service_started
+    networks:
+      - app
+    environment:
+      TZ: "Asia/Almaty"
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/todolist
+      BOT_TOKEN: ${BOT_TOKEN}
+    restart: unless-stopped
+
+networks:
+  app:
+
+volumes:
+  postgres_data:
