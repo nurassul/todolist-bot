@@ -311,24 +311,3 @@ async def process_time_and_save(message: Message, state: FSMContext):
     await message.answer(success_text, reply_markup=main_menu())
     await state.clear()
 
-@router.message(F.text == "🔍 Help")
-@router.message(F.text == "/help")
-async def show_help(msg: Message):
-    text =(
-        "🛠 <b>How to use this bot</b>\n\n"
-        "I am your personal task manager. I will help you track your deadlines and send you reminders so you never miss anything!\n\n"
-        "📌 <b>Main Commands:</b>\n"
-        "<b>/start</b> — Open the main menu.\n"
-        "<b>/add</b> — Create a new task.\n"
-        "<b>/cancel</b> — Stop any current action.\n\n"
-        "<b>/tasks</b> — Show all tasks.\n"
-        "🎯 <b>Features:</b>\n"
-        "📝 <b>Add task:</b> Create a task with a title, description, priority (🔴 High, 🟡 Medium, 🟢 Low), and a strict deadline.\n"
-        "📋 <b>My Tasks:</b> View all your active tasks. Under each task, you can use buttons to:\n"
-        "  ✅ <b>Done</b> — Mark the task as completed.\n"
-        "  ✏️ <b>Edit</b> — Change the title, description, priority, or deadline.\n"
-        "  🗑 <b>Delete</b> — Remove the task permanently.\n\n"
-        "⏰ <b>Smart Reminders:</b>\n"
-        "I will automatically notify you <b>30, 15, and 5 minutes</b> before your deadline, and send a final alert when the time is up!\n\n"
-    )
-    await msg.answer(text, reply_markup=main_menu())

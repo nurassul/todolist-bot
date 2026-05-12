@@ -4,7 +4,8 @@ from aiogram import Bot
 
 from app.db import get_upcoming_deadlines
 
-
+# Для отправки напоминания по поводу задачи.
+# Когда дедлайн 30, 15, 5 и 2 минуты отправляется напоминание
 async def check_and_send_deadlines(bot: Bot):
     try:
         reminders = [
